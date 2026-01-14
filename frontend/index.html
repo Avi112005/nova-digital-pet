@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Pet - Nova</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background"></div>
+    
+    <main class="container">
+        <div class="pet-card">
+            <!-- Pet Avatar Section -->
+            <div class="pet-avatar-section">
+                <div class="pet-avatar">
+                    <div class="avatar-glow"></div>
+                    <div class="avatar-content">🐾</div>
+                </div>
+            </div>
+
+            <!-- Pet Name -->
+            <h1 class="pet-name">Nova</h1>
+
+            <!-- Mood Display -->
+            <div class="mood-section">
+                <div class="mood-badge">
+                    <span class="mood-icon">✨</span>
+                    <span class="mood-text">Delighted</span>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats-section">
+                <!-- Hunger Bar -->
+                <div class="stat-item">
+                    <div class="stat-label">
+                        <span>Hunger</span>
+                        <span class="stat-value" id="hunger-value">65%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill hunger" id="hunger-bar" style="width: 65%"></div>
+                    </div>
+                </div>
+
+                <!-- Happiness Bar -->
+                <div class="stat-item">
+                    <div class="stat-label">
+                        <span>Happiness</span>
+                        <span class="stat-value" id="happiness-value">82%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill happiness" id="happiness-bar" style="width: 82%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="feed-btn">
+                    <span class="btn-icon">🍖</span>
+                    Feed
+                </button>
+                <button class="btn btn-primary" id="play-btn">
+                    <span class="btn-icon">🎾</span>
+                    Play
+                </button>
+            </div>
+
+            <!-- Loading State -->
+            <div class="loading" id="loading">Loading...</div>
+        </div>
+    </main>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,490 @@
+/* ============================================================================
+   RESET & BASE STYLES
+   ============================================================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================================
+   COLOR & THEME TOKENS
+   ============================================================================ */
+
+:root {
+  /* Primary Colors */
+  --bg-primary: #0f1419;
+  --bg-secondary: #1a1f2e;
+  --bg-tertiary: #252d3d;
+
+  /* Accent Colors */
+  --accent-cyan: #4ec9e0;
+  --accent-cyan-light: #6dd5e8;
+  --accent-cyan-dark: #3ab5cc;
+
+  /* Text Colors */
+  --text-primary: #f0f4f8;
+  --text-secondary: #b0b8c4;
+  --text-tertiary: #8a92a2;
+
+  /* Semantic Colors */
+  --stat-hunger: #8e7cc3;
+  --stat-happiness: #f59e0b;
+
+  /* Effects */
+  --glow-cyan: rgba(78, 201, 224, 0.3);
+  --glow-cyan-strong: rgba(78, 201, 224, 0.15);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================================================
+   BACKGROUND
+   ============================================================================ */
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #0f1419 100%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(78, 201, 224, 0.05) 0%, transparent 50%);
+  animation: ambient-glow 8s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes ambient-glow {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ============================================================================
+   LAYOUT
+   ============================================================================ */
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-primary);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+}
+
+/* ============================================================================
+   PET CARD
+   ============================================================================ */
+
+.pet-card {
+  background: rgba(25, 31, 46, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(78, 201, 224, 0.15);
+  border-radius: 32px;
+  padding: 48px 32px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  animation: card-entrance 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes card-entrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.pet-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(78, 201, 224, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* ============================================================================
+   PET AVATAR
+   ============================================================================ */
+
+.pet-avatar-section {
+  text-align: center;
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.pet-avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: avatar-pulse 3s ease-in-out infinite;
+}
+
+.avatar-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, var(--glow-cyan) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(16px);
+  opacity: 0.6;
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+.avatar-content {
+  font-size: 64px;
+  position: relative;
+  z-index: 1;
+  animation: icon-float 3s ease-in-out infinite;
+}
+
+@keyframes avatar-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes icon-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* ============================================================================
+   PET NAME
+   ============================================================================ */
+
+.pet-name {
+  font-size: 48px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text-primary);
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================================================
+   MOOD SECTION
+   ============================================================================ */
+
+.mood-section {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.mood-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(78, 201, 224, 0.15);
+  border: 1px solid rgba(78, 201, 224, 0.3);
+  border-radius: 24px;
+  padding: 8px 16px;
+  animation: badge-glow 2s ease-in-out infinite;
+}
+
+.mood-icon {
+  font-size: 16px;
+  animation: mood-bounce 2s ease-in-out infinite;
+}
+
+.mood-text {
+  color: var(--accent-cyan-light);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+@keyframes badge-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(78, 201, 224, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 12px 0 rgba(78, 201, 224, 0.2);
+  }
+}
+
+@keyframes mood-bounce {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* ============================================================================
+   STATS SECTION
+   ============================================================================ */
+
+.stats-section {
+  margin-bottom: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stat-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.stat-value {
+  color: var(--accent-cyan-light);
+  font-weight: 700;
+}
+
+/* Progress Bars */
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(78, 201, 224, 0.1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 0 12px currentColor;
+}
+
+.progress-fill.hunger {
+  background: linear-gradient(90deg, #8e7cc3, #a891d6);
+}
+
+.progress-fill.happiness {
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+}
+
+/* ============================================================================
+   ACTION BUTTONS
+   ============================================================================ */
+
+.action-buttons {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 0;
+}
+
+.btn {
+  flex: 1;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-cyan-light) 100%);
+  color: var(--bg-primary);
+  box-shadow: 0 4px 16px rgba(78, 201, 224, 0.3);
+  border: 1px solid rgba(78, 201, 224, 0.5);
+}
+
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(78, 201, 224, 0.4);
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(78, 201, 224, 0.3);
+}
+
+.btn-icon {
+  font-size: 18px;
+}
+
+/* ============================================================================
+   LOADING STATE
+   ============================================================================ */
+
+.loading {
+  display: none;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-top: 20px;
+  animation: fade-in 0.3s ease-in;
+}
+
+.loading.active {
+  display: block;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 480px) {
+  .pet-card {
+    padding: 36px 24px;
+    border-radius: 24px;
+  }
+
+  .pet-name {
+    font-size: 36px;
+  }
+
+  .pet-avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .avatar-content {
+    font-size: 48px;
+  }
+
+  .stats-section {
+    gap: 20px;
+  }
+
+  .btn {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  .btn-icon {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .pet-card {
+    padding: 28px 20px;
+  }
+
+  .pet-name {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  .mood-badge {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+  }
+
+  .action-buttons {
+    gap: 12px;
+  }
+}
